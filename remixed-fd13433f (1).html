@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ScaleWave Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  img {
+    width: 100%; /* or any custom size */
+    height: 100%; 
+    object-fit: contain;
+  }
+
+  :root {
+    --red: #C0272D;
+    --red-light: #E03A40;
+    --red-dim: #8B1A1E;
+    --red-glow: rgba(192,39,45,0.15);
+    --dark: #0A0A0A;
+    --dark2: #111111;
+    --dark3: #1A1A1A;
+    --cream: #F5F0F0;
+    --text-light: #9A8A8A;
+    --white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--cream); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10,10,10,0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(192,39,45,0.25);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--red); letter-spacing: 0.04em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--cream); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.25s; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta { background: var(--red); color: var(--white) !important; padding: 0.5rem 1.2rem; border-radius: 2px; font-weight: 500 !important; }
+  .nav-cta:hover { background: var(--red-light) !important; }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 3rem 4rem; position: relative; overflow: hidden; }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 55% 55% at 70% 40%, rgba(192,39,45,0.14) 0%, transparent 70%),
+                radial-gradient(ellipse 35% 35% at 15% 75%, rgba(192,39,45,0.07) 0%, transparent 70%);
+  }
+  .hero-grid { position: absolute; inset: 0; opacity: 0.04; background-image: linear-gradient(var(--red) 1px, transparent 1px), linear-gradient(90deg, var(--red) 1px, transparent 1px); background-size: 80px 80px; }
+  .hero-content { position: relative; max-width: 720px; }
+  .hero-tag { display: inline-block; border: 1px solid var(--red); color: var(--red); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.35rem 0.9rem; margin-bottom: 2rem; animation: fadeUp 0.8s ease both; }
+  .hero-h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; animation: fadeUp 0.8s 0.15s ease both; }
+  .hero-h1 em { color: var(--red); font-style: normal; }
+  .hero-sub { font-size: 1.1rem; font-weight: 300; color: var(--text-light); line-height: 1.7; max-width: 520px; margin-bottom: 2.5rem; animation: fadeUp 0.8s 0.3s ease both; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.8s 0.45s ease both; }
+  .btn-primary { background: var(--red); color: var(--white); padding: 0.85rem 2rem; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.25s, transform 0.2s; }
+  .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--cream); padding: 0.85rem 2rem; border: 1px solid rgba(245,240,240,0.25); cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: border-color 0.25s, color 0.25s; }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); }
+  .hero-stat-row { position: absolute; bottom: 3rem; right: 3rem; display: flex; gap: 3rem; animation: fadeUp 0.8s 0.6s ease both; }
+  .stat { text-align: right; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--red); font-weight: 700; }
+  .stat-label { font-size: 0.75rem; color: var(--text-light); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* SHARED */
+  section { padding: 5rem 3rem; }
+  .section-tag { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 0.8rem; }
+  .section-h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.15; }
+  .section-lead { font-size: 1rem; color: var(--text-light); max-width: 540px; line-height: 1.7; margin-bottom: 3rem; }
+
+  /* WORK */
+  #work { background: var(--dark2); }
+  .work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .work-card { position: relative; overflow: hidden; aspect-ratio: 4/3; background: var(--dark3); border: 1px solid rgba(192,39,45,0.15); cursor: pointer; }
+  .work-card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .work-card:hover .work-card-img { transform: scale(1.06); }
+  .work-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem; opacity: 0; transition: opacity 0.3s; }
+  .work-card:hover .work-card-overlay { opacity: 1; }
+  .work-card-label { position: absolute; top: 1rem; left: 1rem; background: var(--red); color: var(--white); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.25rem 0.65rem; }
+  .work-card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); margin-bottom: 0.3rem; }
+  .work-card-sub { font-size: 0.8rem; color: var(--red-light); }
+  .ph-wrap { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.5rem; background: var(--dark3); padding: 1.5rem; text-align: center; }
+  .ph-wrap .ph-name { font-family: 'Playfair Display', serif; color: var(--red); font-size: 1rem; }
+  .ph-wrap .ph-desc { font-size: 0.72rem; color: var(--text-light); max-width: 200px; line-height: 1.5}
+  .ph-wrap .ph-line { width: 100%; height: 2px; background: linear-gradient(90deg, var(--red), transparent); margin-top: 0.5rem; }
+
+  /* BUNDLES */
+  #bundles { background: var(--dark); }
+  .bundles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+  .bundle-card {
+    border: 1px solid rgba(192,39,45,0.2);
+    padding: 2rem; position: relative;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    cursor: pointer; background: var(--dark2);
+  }
+  .bundle-card:hover, .bundle-card.selected {
+    border-color: var(--red);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(192,39,45,0.18);
+  }
+  .bundle-card.featured { border-color: var(--red); background: rgba(192,39,45,0.06); }
+  .bundle-badge { position: absolute; top: -1px; right: 1.5rem; background: var(--red); color: var(--white); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.8rem; }
+  .bundle-icon { font-size: 1.4rem; margin-bottom: 0.7rem; }
+  .bundle-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .bundle-tagline { font-size: 0.82rem; color: var(--text-light); margin-bottom: 1rem; line-height: 1.5; font-style: italic; }
+  .bundle-price { font-size: 2.4rem; color: var(--red); font-weight: 700; margin-bottom: 1.2rem; font-family: 'Playfair Display', serif; }
+  .bundle-features { list-style: none; margin-bottom: 1.5rem; }
+  .bundle-features li { font-size: 0.88rem; color: var(--text-light); padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.4; }
+  .bundle-features li::before { content: "▸"; color: var(--red); font-size: 0.7rem; margin-top: 0.2rem; flex-shrink: 0; }
+  .bundle-select-btn { width: 100%; padding: 0.75rem; background: transparent; border: 1px solid rgba(192,39,45,0.35); color: var(--cream); cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.25s; }
+  .bundle-select-btn:hover, .bundle-card.selected .bundle-select-btn { background: var(--red); border-color: var(--red); color: var(--white); }
+  .bundle-card.selected .bundle-select-btn::after { content: " ✓"; }
+
+  /* CONTACT */
+  #contact { background: var(--dark2); }
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 1rem; }
+  .contact-info p { color: var(--text-light); line-height: 1.7; margin-bottom: 1.5rem; font-size: 0.95rem; }
+  .contact-detail { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem; }
+  .contact-detail-icon { color: var(--red); font-size: 1rem; }
+  .contact-detail-text { font-size: 0.9rem; color: var(--text-light); }
+  .inquiry-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .field-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field-group label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); }
+  .field-group input, .field-group select, .field-group textarea { background: var(--dark3); border: 1px solid rgba(192,39,45,0.18); color: var(--cream); padding: 0.8rem 1rem; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.25s; appearance: none; }
+  .field-group input:focus, .field-group select:focus, .field-group textarea:focus { border-color: var(--red); }
+  .field-group textarea { resize: vertical; min-height: 110px; }
+  .bundle-selector-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem; }
+  .bundle-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .bundle-chip { padding: 0.4rem 1rem; border: 1px solid rgba(192,39,45,0.25); font-size: 0.8rem; cursor: pointer; letter-spacing: 0.05em; background: transparent; color: var(--cream); transition: all 0.2s; }
+  .bundle-chip:hover { border-color: var(--red); color: var(--red); }
+  .bundle-chip.active { background: var(--red); color: var(--white); border-color: var(--red); }
+  .form-submit { background: var(--red); color: var(--white); border: none; padding: 1rem 2rem; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.25s, transform 0.2s; width: 100%;}
+  .form-submit:hover { background: var(--red-light); transform: translateY(-2px); }
+  .form-note { font-size: 0.78rem; color: var(--text-light); text-align: center; margin-top: 0.3rem; }
+  .success-msg { display: none; text-align: center; padding: 3rem 2rem; border: 1px solid var(--red); background: rgba(192,39,45,0.06); }
+  .success-msg.show { display: block; }
+  .success-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .success-msg h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 0.7rem; }
+  .success-msg p { color: var(--text-light); font-size: 0.95rem; }
+
+  footer { background: var(--dark); padding: 2rem 3rem; border-top: 1px solid rgba(192,39,45,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--red); }
+  .footer-copy { font-size: 0.8rem; color: var(--text-light); }
+
+  .center-text{
+    text-align: center;
+  }
+  a{
+    outline: none;
+    text-decoration: none;
+  }
+
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { padding: 7rem 1.5rem 4rem; }
+    .hero-stat-row { position: static; margin-top: 3rem; justify-content: flex-start; gap: 2rem; }
+    section { padding: 4rem 1.5rem; }
+    .contact-wrap { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">ScaleWave<span style="color:var(--cream)">.</span></div>
+  <ul class="nav-links">
+    <li><a href="#work">Portfolio</a></li>
+    <li><a href="#bundles">Bundles</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Small Business Advertising Specialist</div>
+    <h1 class="hero-h1">Make Your<br/>Business <em>Impossible</em><br/>to Ignore</h1>
+    <p class="hero-sub">Affordable, high-impact advertising crafted specifically for small businesses. From social media campaigns to full brand packages — let's get your name out there.</p>
+    <div class="hero-btns">
+      <a href="#work" class="btn-primary">See My Work</a>
+      <a href="#bundles" class="btn-outline">View Bundles</a>
+    </div>
+  </div>
+  <div class="hero-stat-row">
+    <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Clients Served</div></div>
+    <div class="stat"><div class="stat-num">3×</div><div class="stat-label">Avg. Reach Growth</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Custom Creative</div></div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="work">
+  <p class="section-tag reveal">Featured Work</p>
+  <h2 class="section-h2 reveal">Campaigns That Convert</h2>
+  <p class="section-lead reveal">Real results for real small businesses — including faith apparel brand LUMEN.co and more.</p>
+  <div class="work-grid">
+
+    <div class="work-card reveal pad">
+      <img id="img1" class="work-card-img" alt="LUMEN.co Campaign Shoot"/>
+      <div class="ph-wrap" id="ph1">
+        <div class="ph-desc"><img src="./LUMEN_-_1.png" alt="Girl in a jacket" ></div>
+        <div class="ph-line"></div>
+      </div>
+      <div class="work-card-label">LUMEN.co</div>
+      <div class="work-card-overlay">
+        <div class="work-card-title">Power In Christ · Campaign Shoot</div>
+        <div class="work-card-sub">Apparel · Social Content · Brand Photography</div>
+      </div>
+    </div>
+
+    <div class="work-card reveal">
+      <img id="img2" class="work-card-img" alt="LUMEN.co Seek Jesus Polo"/>
+      <div class="ph-wrap" id="ph2">
+        <div class="ph-desc"><img src="./LUMEN_-_2.png" alt="Girl in a jacket" width="500" height="600"></div>
+        <div class="ph-line"></div>
+      </div>
+      <div class="work-card-label">LUMEN.co</div>
+      <div class="work-card-overlay">
+        <div class="work-card-title">Seek Jesus Polo · Product Ad</div>
+        <div class="work-card-sub">Product Launch · Instagram · Faith Apparel</div>
+      </div>
+    </div>
+
+    <div class="work-card reveal">
+      <img id="img3" class="work-card-img" alt="LUMEN.co New Drop"/>
+      <div class="ph-wrap" id="ph3">
+        <div class="ph-desc"><img src="./LUMEN_-_3.png" alt="Girl in a jacket" width="500" height="600"></div>
+        <div class="ph-line"></div>
+      </div>
+      <div class="work-card-label">LUMEN.co</div>
+      <div class="work-card-overlay">
+        <div class="work-card-title">New Drop · Full Collection</div>
+        <div class="work-card-sub">Collection Launch · Brand Identity · Social Media</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BUNDLES -->
+<section id="bundles">
+  <p class="section-tag reveal">Advertising Packages</p>
+  <h2 class="section-h2 reveal">Choose Your Bundle</h2>
+  <p class="section-lead reveal">Simple, transparent pricing. Pick what fits your goals and let's get to work.</p>
+  <div class="bundles-grid">
+
+    <div class="bundle-card reveal" data-bundle="Starter" onclick="selectBundle(this)">
+      <div class="bundle-icon">🔹</div>
+      <div class="bundle-name">Starter Pack</div>
+      <div class="bundle-price">$15</div>
+      <div class="bundle-tagline">Perfect for quick content or testing a new idea.</div>
+      <ul class="bundle-features">
+        <li>1 Custom Poster</li>
+        <li>Designed for any platform (Instagram, TikTok, YouTube, etc.)</li>
+        <li>High-quality, ready-to-post format</li>
+      </ul>
+      <button class="bundle-select-btn">Select Bundle</button>
+    </div>
+
+    <div class="bundle-card featured reveal" data-bundle="Growth" onclick="selectBundle(this)">
+      <div class="bundle-icon">🔹</div>
+      <div class="bundle-name">Growth Pack</div>
+      <div class="bundle-price">$25</div>
+      <div class="bundle-tagline">Best for consistent branding and small campaigns.</div>
+      <ul class="bundle-features">
+        <li>3 Custom Posters</li>
+        <li>Optimized for any platform</li>
+        <li>Cohesive design style across all posts</li>
+        <li>Fast turnaround</li>
+      </ul>
+      <button class="bundle-select-btn">Select Bundle</button>
+    </div>
+
+    <div class="bundle-card reveal" data-bundle="Ultimate" onclick="selectBundle(this)">
+      <div class="bundle-badge">⭐ Best Value</div>
+      <div class="bundle-icon">🔹</div>
+      <div class="bundle-name">Ultimate Promo</div>
+      <div class="bundle-price">$55</div>
+      <div class="bundle-tagline">For brands that want to stand out and grow fast.</div>
+      <ul class="bundle-features">
+        <li>5 Custom Posters</li>
+        <li>1 Promotional Video (short-form, platform-ready)</li>
+        <li>Full branding consistency across all content</li>
+        <li>Designed for any platform</li>
+        <li>Priority delivery</li>
+      </ul>
+      <button class="bundle-select-btn">Select Bundle</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-tag reveal">Get In Touch</p>
+  <h2 class="section-h2 reveal">Let's Build Your Campaign</h2>
+  <div class="contact-wrap">
+    <div class="contact-info reveal">
+      <h3>Tell me exactly what you need and I'll make it happen.</h3>
+      <p>Fill out the form with as much detail as possible — the more I know about your business and goals, the better I can craft content that truly works for you.</p>
+      <div class="contact-detail"><span class="contact-detail-icon">▸</span><span class="contact-detail-text">Free 15-min discovery call included</span></div>
+      <div class="contact-detail"><span class="contact-detail-icon">▸</span><span class="contact-detail-text">No contracts — pay per project</span></div>
+      <div class="contact-detail"><span class="contact-detail-icon">▸</span><span class="contact-detail-text">Based in Richmond, VA — serving businesses nationwide</span></div>
+    </div>
+    <div class="reveal">
+      <div id="inquiry-form-wrap">
+        <div class="inquiry-form" onsubmit="submitForm(event)">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeTkh-wqg9AuD2j7QtjbRzmKLvJ3_kpN_EZC-xJTsWl1jK9CQ/viewform?embedded=true" target="_blank" class="form-submit center-text">Send My Inquiry →</a>
+          
+          <p class="form-note">I'll personally review every submission</p>
+        </div>
+      </div>
+      <div class="success-msg" id="success-msg">
+        <div class="success-icon">🔴</div>
+        <h3>Inquiry Received!</h3>
+        <p>Thank you — I'll review your details and reach out within 24 hours to discuss your campaign.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">YourBrand.</div>
+  <div class="footer-copy">© 2026 · Small Business Advertising · All rights reserved</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+
+  // Hide placeholder when real image loads
+  ['1','2','3'].forEach(n => {
+    const img = document.getElementById('img'+n);
+    const ph  = document.getElementById('ph'+n);
+    if (!img) return;
+    img.onload  = () => { if(ph) ph.style.display='none'; };
+    img.onerror = () => { img.style.display='none'; };
+    if (!img.src || img.src === window.location.href) img.style.display='none';
+  });
+
+  function selectBundle(card) {
+    document.querySelectorAll('.bundle-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    const name = card.getAttribute('data-bundle');
+    document.querySelectorAll('.bundle-chip').forEach(ch => ch.classList.toggle('active', ch.textContent.includes(name)));
+    document.getElementById('f-bundle').value = name;
+    setTimeout(() => document.getElementById('contact').scrollIntoView({behavior:'smooth'}), 200);
+  }
+
+  function chipSelect(chip, name) {
+    document.querySelectorAll('.bundle-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    document.getElementById('f-bundle').value = name;
+    document.querySelectorAll('.bundle-card').forEach(c => c.classList.toggle('selected', c.getAttribute('data-bundle') === name));
+  }
+
+  function submitForm(e) {
+    e.preventDefault();
+    if (!document.getElementById('f-bundle').value) { alert('Please select a bundle before submitting.'); return; }
+    document.getElementById('inquiry-form-wrap').style.display = 'none';
+    document.getElementById('success-msg').classList.add('show');
+    window.scrollTo({top: document.getElementById('contact').offsetTop, behavior:'smooth'});
+  }
+</script>
+</body>
+</html>
